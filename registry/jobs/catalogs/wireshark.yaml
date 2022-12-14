@@ -1,0 +1,28 @@
+spec: v1.0
+desc: Catalog for working with Wireshark.
+
+jobs:
+  - macro: setup
+    title: Set up Wireshark
+    steps:
+      - exec sudo apt update
+      - exec sudo apt install -y wireshark
+      - exec.log wireshark --version
+  
+  - macro: conf
+    title: Configure Wireshark
+    local:
+      - const: addToGroup
+        desc: Add current user to wireshark group.
+        value: $(args.group)
+        defaultValue: yes
+    steps:
+      - exec sudo dpkg-reconfigure -fnoninteractive wireshark-common
+      - step: exec sudo usermod -aG wireshark $(user.name)
+        if: addToGroup
+      - banner PLEASE, REBOOT
+
+  - macro: remove
+    title: Remove Wireshark if installed
+    steps:
+      - exec sudo apt autoremove -y wireshark
