@@ -1,14 +1,13 @@
 name: Bug report
-description: Create a bug report
+description: Create a bug report.
 title: "[bug] "
 
 body:
   - type: input
-    id: package
+    id: catalog
     attributes:
-      label: Package name and version
-      description: Name and version of the package used
-      placeholder: ex. @owner/package 1.2.3
+      label: Catalog name
+      description: Name of the catalog
     validations:
       required: true
   
