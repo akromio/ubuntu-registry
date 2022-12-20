@@ -11,7 +11,7 @@ jobs:
   
   - macro: conf
     title: Configure Wireshark
-    local:
+    dataset:
       - const: addToGroup
         desc: Add current user to wireshark group.
         value: $(args.group)
